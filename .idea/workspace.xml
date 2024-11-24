@@ -4,7 +4,51 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="" />
+    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="new hz project">
+      <change afterPath="$PROJECT_DIR$/.hz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/auth/auth_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/cart/cart_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/checkout/checkout_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/order/order_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/payment/payment_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/ping.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/product/product_catalog_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/user/user_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/api/api.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/auth/auth.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/cart/cart.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/checkout/checkout.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/order/order.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/payment/payment.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/product/product.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/user/user.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/api/api.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/api/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/auth/auth.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/auth/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/cart/cart.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/cart/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/checkout/checkout.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/checkout/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/order/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/order/order.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/payment/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/payment/payment.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/product/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/product/product.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/register.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/user/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/user/user.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router_gen.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/bootstrap.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +57,9 @@
   <component name="GOROOT" url="file:///usr/lib/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -25,11 +72,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
     "go.import.settings.migrated": "true",
     "go.sdk.automatically.set": "true",
     "last_opened_file_path": "/home/U1traVeno/Projects/tiktok_shop",
@@ -50,6 +100,22 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed idl files" />
+    <MESSAGE value="new hz project" />
+    <option name="LAST_COMMIT_MESSAGE" value="new hz project" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
