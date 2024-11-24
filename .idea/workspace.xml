@@ -5,49 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="new hz project">
-      <change afterPath="$PROJECT_DIR$/.hz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/auth/auth_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/cart/cart_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/checkout/checkout_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/order/order_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/payment/payment_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/ping.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/product/product_catalog_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/handler/user/user_service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/api/api.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/auth/auth.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/cart/cart.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/checkout/checkout.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/order/order.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/payment/payment.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/product/product.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/model/user/user.pb.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/api/api.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/api/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/auth/auth.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/auth/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/cart/cart.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/cart/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/checkout/checkout.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/checkout/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/order/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/order/order.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/payment/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/payment/payment.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/product/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/product/product.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/register.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/user/middleware.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biz/router/user/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/router_gen.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/script/bootstrap.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
