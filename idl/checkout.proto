@@ -6,8 +6,6 @@ import "payment.proto";
 
 option go_package = "/checkout";
 
-import "api.proto";
-
 service CheckoutService {
   rpc Checkout(CheckoutReq) returns (CheckoutResp) {}
 }

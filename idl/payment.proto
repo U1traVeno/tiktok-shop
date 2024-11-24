@@ -4,8 +4,6 @@ package payment;
 
 option go_package = "/payment";
 
-import "api.proto";
-
 service PaymentService {
   rpc Charge(ChargeReq) returns (ChargeResp) {}
 }

@@ -4,8 +4,6 @@ package cart;
 
 option go_package = "/cart";
 
-import "api.proto";
-
 service CartService {
   rpc AddItem(AddItemReq) returns (AddItemResp) {}
   rpc GetCart(GetCartReq) returns (GetCartResp) {}

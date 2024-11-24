@@ -4,8 +4,6 @@ package auth;
 
 option go_package = "/auth";
 
-import "api.proto";
-
 service AuthService {
     rpc DeliverTokenByRPC(DeliverTokenReq) returns (DeliveryResp) {}
     rpc VerifyTokenByRPC(VerifyTokenReq) returns (VerifyResp) {}

@@ -4,8 +4,6 @@ package product;
 
 option go_package = "/product";
 
-import "api.proto";
-
 service ProductCatalogService {
   rpc ListProducts(ListProductsReq) returns (ListProductsResp) {}
   rpc GetProduct(GetProductReq) returns (GetProductResp) {}

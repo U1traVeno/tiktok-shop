@@ -4,8 +4,6 @@ package user;
 
 option go_package="/user";
 
-import "api.proto";
-
 service UserService {
   rpc Register(RegisterReq) returns (RegisterResp) {}
   rpc Login(LoginReq) returns (LoginResp) {}

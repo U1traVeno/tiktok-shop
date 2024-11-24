@@ -6,8 +6,6 @@ import "cart.proto";
 
 option go_package = "/order";
 
-import "api.proto";
-
 service OrderService {
   rpc PlaceOrder(PlaceOrderReq) returns (PlaceOrderResp) {}
   rpc ListOrder(ListOrderReq) returns (ListOrderResp) {}
