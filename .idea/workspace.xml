@@ -4,10 +4,24 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="Initialized hz project">
+      <change afterPath="$PROJECT_DIR$/.hz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/auth/auth_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/handler/ping.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/api/api.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/model/auth/auth.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/auth/auth.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/auth/middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biz/router/register.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/router_gen.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/script/bootstrap.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tiktok-shop" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/idl/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/idl/auth.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +31,10 @@
   <component name="GOROOT" url="file:///usr/lib/go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -66,6 +84,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated README.md" />
+    <MESSAGE value="Initialized hz project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initialized hz project" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
