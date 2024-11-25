@@ -3,7 +3,7 @@
 
 ## How to initialize the project
 
-这里已经写好了一个调用了hertz提供的 api.proto 的 auth.proto, 其他的proto文件也可以参考这个文件进行编写. 
+这里已经写好了一个调用了hertz提供的 api.proto 的 auth.proto, 其他的proto文件也可以参考这个文件进行编写.
 
 接口文档来源于青训营提供的电商项目方案文档, 稍作了修改使之符合 [proto3的语法规范](https://protobuf.dev/programming-guides/proto3/).
 
@@ -70,5 +70,31 @@ go build
 curl http://localhost:8888/ping
 {"message":"pong"}
 ```
+
+## 如何开发
+
+### 0. 创建新的git分支
+
+不要把main分支搞炸了, 请在main分支上创建新的分支进行开发.
+
+比如想搞一个auth模块, 那么可以在main上面创建一个feature-auth分支, 确认没有问题之后, 再合并到main上面.
+
+### 1. 定义接口
+
+想好这个接口需要有哪些方法, 以及每个方法需要传入什么参数, 返回什么数据, 然后依葫芦画瓢, 在proto文件中定义接口.
+
+定义好接口之后, 执行`hz update -idl idl/your.proto`生成代码.
+
+### 2. 编写业务逻辑
+
+在handler目录下, 编写业务逻辑, 你可以在这里调用其他服务, 操作数据库, 等等.
+
+### 3. 添加中间件
+
+在router目录下, 编写中间件, 你可以在这里做一些权限校验, 日志记录, 等等.
+
+### 4. 编写测试
+
+To do...
 
 
