@@ -3,6 +3,7 @@
 package basic_auth
 
 import (
+	"context"
 	basic_auth "github.com/U1traVeno/tiktok-shop/biz/model/basic_auth"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -10,7 +11,7 @@ import (
 
 // BasicAuth .
 // @router /basic_auth [GET]
-func BasicAuth(c *app.RequestContext) {
+func BasicAuth(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req basic_auth.BasicAuthReq
 	err = c.BindAndValidate(&req)

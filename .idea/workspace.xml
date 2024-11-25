@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="Initialized hz project">
-      <change afterPath="$PROJECT_DIR$/idl/basic_auth.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/protoeditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/protoeditor.xml" afterDir="false" />
+    <list default="true" id="f65deda2-0783-4bda-8e98-b5d16e8aa467" name="更改" comment="Add a basic authorization.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biz/router/register.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/router/register.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiktok-shop" beforeDir="false" afterPath="$PROJECT_DIR$/tiktok-shop" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biz/handler/basic_auth/basic_auth_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/biz/handler/basic_auth/basic_auth_service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -84,7 +82,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated README.md" />
     <MESSAGE value="Initialized hz project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized hz project" />
+    <MESSAGE value="Add a basic authorization." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a basic authorization." />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
