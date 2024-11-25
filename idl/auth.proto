@@ -4,23 +4,29 @@ package auth;
 
 option go_package = "/auth";
 
+import "api.proto";
+
 service AuthService {
-    rpc DeliverTokenByRPC(DeliverTokenReq) returns (DeliveryResp) {}
-    rpc VerifyTokenByRPC(VerifyTokenReq) returns (VerifyResp) {}
+    rpc DeliverTokenByRPC(DeliverTokenReq) returns (DeliveryResp) {
+        option (api.get) = "/auth/deliver";
+    }
+    rpc VerifyTokenByRPC(VerifyTokenReq) returns (VerifyResp) {
+        option (api.post) = "/auth/verify";
+    }
 }
 
 message DeliverTokenReq {
-    int32 user_id = 1;
+    int32 user_id = 1 [(api.query) = "user_id"];
 }
 
 message VerifyTokenReq {
-    string token = 1;
+    string token = 1 [(api.query) = "token"];
 }
 
 message DeliveryResp {
-    string token = 1;
+    string token = 1 [(api.query) = "token"];
 }
 
 message VerifyResp {
-    bool res = 1;
+    bool res = 1 [(api.query) = "res"];
 }
