@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package basic_auth;
+
+option go_package = "/basic_auth";
+
+import "api.proto";
+
+service BasicAuthService {
+    rpc BasicAuth(BasicAuthReq) returns (BasicAuthResp) {
+        option (api.get) = "/basic_auth";
+    }
+}
+
+message BasicAuthReq {
+  string Authorization = 1 [(api.header) = "Authorization"];
+  string Username = 2;
+  string Password = 3;
+}
+
+message BasicAuthResp {
+  string RespBody = 1;
+}
