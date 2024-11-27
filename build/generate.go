@@ -1,6 +1,6 @@
 /*
 Usage:
-在build目录下创建.env文件，内容如下：
+在 项目根目录 下创建.env文件，内容如下：
 
 DB_USER=youruser
 DB_PASSWORD=yourpassword
@@ -8,13 +8,16 @@ DB_HOST=113.xx.xx.xxx
 DB_PORT=xxxxx
 DB_NAME=yourdbname
 
-然后在该文件下修改OutPath为你自己的dal路径
+之后编辑71行的OutPath，将 your_model_name 替换为你的模型名，
+编辑 77 行的 g.ApplyBasic(model.User{})，将 User 替换为你的模型名
+然后运行 go run ./build/generate.go
+
+脚本会在 biz/dal/query/your_model_name/ 目录下生成对应的查询代码
 */
 package main
 
 import (
 	"fmt"
-	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	"log"
 	"os"
 
@@ -61,11 +64,12 @@ func main() {
 
 	// 初始化 GORM Generator
 	// 这里的OutPath改成自己模块的路径
-	// 示例: OutPath: "../biz/dal/query/user/", 会生成到 biz/dal/query/user/ 目录下
+	// 示例: OutPath: "./biz/dal/query/user/", 会生成到 biz/dal/query/user/ 目录下
 
 	g := gen.NewGenerator(gen.Config{
 
-		//OutPath: "*** YOUR CODE HERE ***",
+		// Replace your_model_name with your model name
+		OutPath: "./biz/dal/query/your_model_name/", // 输出路径
 
 		Mode: gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
@@ -73,10 +77,8 @@ func main() {
 	// 使用数据库对象
 	g.UseDB(gormdb)
 
-	// 初始化所有模型
-	allModels := model.NewAllModels()
-
-	g.ApplyBasic(allModels)
+	// Add your own model here
+	//g.ApplyBasic(model.User{})
 
 	g.Execute()
 }
