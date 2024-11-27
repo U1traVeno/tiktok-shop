@@ -1,6 +1,9 @@
 /*
+Description:
+自动生成查询代码
+
 Usage:
-在 项目根目录 下创建.env文件，内容如下：
+1. 在 项目根目录 下创建.env文件，内容如下：
 
 DB_USER=youruser
 DB_PASSWORD=yourpassword
@@ -8,11 +11,14 @@ DB_HOST=113.xx.xx.xxx
 DB_PORT=xxxxx
 DB_NAME=yourdbname
 
-之后编辑71行的OutPath，将 your_model_name 替换为你的模型名，
-编辑 77 行的 g.ApplyBasic(model.User{})，将 User 替换为你的模型名
-然后运行 go run ./build/generate.go
+2. 编辑 78 行的OutPath，将 your_model_name 替换为你的模型名，
+3. 编辑 87 行的 g.ApplyBasic(model.User{})，将 User 替换为你的模型名, 取消注释
+4. 运行 go run ./build/generate.go
 
-脚本会在 biz/dal/query/your_model_name/ 目录下生成对应的查询代码
+脚本会在 /biz/dal/query/your_model_name/ 目录下生成对应的查询代码
+
+在实际运行之前, 建议可以把 61 行的search_path=xd_schema 替换为你的数据库 xd_test 的 schema 名称
+xd_test 里面看起来没有问题之后, 再替换回来
 */
 package main
 

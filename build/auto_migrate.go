@@ -1,3 +1,22 @@
+/*
+Description:
+自动迁移数据库表结构
+
+Usage:
+1. 在 项目根目录 下创建.env文件，内容如下：
+DB_USER=myuser
+DB_PASSWORD=mypassword
+DB_HOST=1xx.xx.xx.xxx
+DB_PORT=xxxxx
+DB_NAME=mydb
+
+2. 运行 go run ./build/auto_migrate.go
+
+脚本会自动迁移所有模型到数据库中
+
+在实际运行之前, 建议可以把 52 行的search_path=xd_schema 替换为你的数据库 xd_test 的 schema 名称
+xd_test 里面看起来没有问题之后, 再替换回来
+*/
 package main
 
 import (
