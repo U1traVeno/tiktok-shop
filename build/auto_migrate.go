@@ -30,7 +30,7 @@ func main() {
 
 	// 构建 DSN
 	dsn := fmt.Sprintf(
-		"user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai",
+		"user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai search_path=xd_schema",
 		dbUser, dbPassword, dbHost, dbPort, dbName,
 	)
 
