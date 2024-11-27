@@ -14,6 +14,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	"log"
 	"os"
 
@@ -72,12 +73,10 @@ func main() {
 	// 使用数据库对象
 	g.UseDB(gormdb)
 
-	// 根据你的模型定义，生成代码
-	// 也可以使用 g.ApplyInterface() 生成接口代码, 看自己需求
-	models := []interface{}{
-		// Your models here
-	}
-	g.ApplyBasic(models...)
+	// 初始化所有模型
+	allModels := model.NewAllModels()
+
+	g.ApplyBasic(allModels)
 
 	g.Execute()
 }
