@@ -4,26 +4,51 @@ package user;
 
 option go_package="/user";
 
-service UserService {
-  rpc Register(RegisterReq) returns (RegisterResp) {}
-  rpc Login(LoginReq) returns (LoginResp) {}
+import "api.proto";
+
+service UserHandler {
+  rpc User(UserReq) returns (UserResp) {
+    option (api.get) = "/user/";
+  }
+  rpc UserRegister(UserRegisterReq) returns (UserRegisterResp) {
+    option (api.post) = "/user/register";
+  }
+  rpc UserLogin(UserLoginReq) returns (UserLoginResp) {
+    option (api.post) = "/user/login";
+  }
 }
 
-message RegisterReq {
-  string email = 1;
+message UserReq {
+  int64 user_id = 1;
+  string token = 2;
+}
+
+message UserResp {
+  int32 status_code = 1[(api.go_tag)='json:"status_code"'];
+  string status_msg = 2;
+  string message = 3;
+}
+
+message UserRegisterReq {
+  string username = 1;
   string password = 2;
-  string confirm_password = 3;
 }
 
-message RegisterResp {
-  int32 user_id = 1;
+message UserRegisterResp {
+  int32 status_code = 1[(api.go_tag)='json:"status_code"'];
+  string status_msg = 2;
+  int64 user_id = 3;
+  string token = 4;
 }
 
-message LoginReq {
-  string email= 1;
+message UserLoginReq {
+  string username = 1;
   string password = 2;
 }
 
-message LoginResp {
-  int32 user_id = 1;
+message UserLoginResp {
+  int32 status_code = 1[(api.go_tag)='json:"status_code"'];
+  string status_msg = 2;
+  int64 user_id = 3;
+  string token = 4;
 }
