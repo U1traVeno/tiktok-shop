@@ -9,6 +9,7 @@ require (
 	gorm.io/driver/postgres v1.5.10
 	gorm.io/gen v0.3.26
 	gorm.io/gorm v1.25.12
+	github.com/lib/pq v1.10.4
 )
 
 require (

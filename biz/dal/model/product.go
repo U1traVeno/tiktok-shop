@@ -1,13 +1,15 @@
 package model
 
-import "gorm.io/gorm"
+import (
+	"github.com/lib/pq"
+	"gorm.io/gorm"
+)
 
 type Product struct {
 	gorm.Model
-	Id          uint32   `json:"id"`
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	Picture     string   `json:"picture"`
-	Price       float32  `json:"price"`
-	Categories  []string `json:"categories"`
+	Name        string         `json:"name"`
+	Description string         `json:"description"`
+	Picture     string         `json:"picture"`
+	Price       float32        `json:"price"`
+	Categories  pq.StringArray `gorm:"type:text[]" json:"categories"`
 }

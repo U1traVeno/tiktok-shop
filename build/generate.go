@@ -76,7 +76,7 @@ func main() {
 	g := gen.NewGenerator(gen.Config{
 
 		// Replace your_model_name with your model name
-		OutPath: "./biz/dal/query/your_model_name/", // 输出路径
+		OutPath: "./biz/dal/query/Product/", // 输出路径
 
 		Mode: gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
