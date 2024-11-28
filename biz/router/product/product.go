@@ -16,4 +16,12 @@ import (
 // Register register routes based on the IDL 'api.${HTTP Method}' annotation.
 func Register(r *server.Hertz) {
 
+	root := r.Group("/", rootMw()...)
+	root.GET("/products", append(_listproductsMw(), product.ListProducts)...)
+	_products := root.Group("/products", _productsMw()...)
+	_products.DELETE("/{id}", append(_deleteproductMw(), product.DeleteProduct)...)
+	_products.GET("/{id}", append(_getproductMw(), product.GetProduct)...)
+	_products.PUT("/{id}", append(_updateproductMw(), product.UpdateProduct)...)
+	_products.GET("/search", append(_searchproductsMw(), product.SearchProducts)...)
+	root.POST("/products", append(_createproductMw(), product.CreateProduct)...)
 }

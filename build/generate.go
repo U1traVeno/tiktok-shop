@@ -24,6 +24,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	"log"
 	"os"
 
@@ -58,7 +59,7 @@ func main() {
 
 	// 构建 DSN
 	dsn := fmt.Sprintf(
-		"user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai search_path=xd_schema",
+		"user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai search_path=xd_test",
 		dbUser, dbPassword, dbHost, dbPort, dbName,
 	)
 
@@ -84,7 +85,7 @@ func main() {
 	g.UseDB(gormdb)
 
 	// Add your own model here
-	//g.ApplyBasic(model.User{})
+	g.ApplyBasic(model.Product{})
 
 	g.Execute()
 }
