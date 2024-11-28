@@ -19,8 +19,8 @@ service UserHandler {
 }
 
 message UserReq {
-  int64 user_id = 1;
-  string token = 2;
+  int64 user_id = 1[(api.go_tag)='json:"user_id"'];
+  string token = 2[(api.go_tag)='json:"token"'];
 }
 
 message UserResp {
@@ -30,8 +30,8 @@ message UserResp {
 }
 
 message UserRegisterReq {
-  string username = 1;
-  string password = 2;
+  string username = 1[(api.go_tag)='json:"username"'];
+  string password = 2[(api.go_tag)='json:"password"'];
 }
 
 message UserRegisterResp {
@@ -42,8 +42,8 @@ message UserRegisterResp {
 }
 
 message UserLoginReq {
-  string username = 1;
-  string password = 2;
+  string username = 1[(api.go_tag)='json:"username"'];
+  string password = 2[(api.go_tag)='json:"password"'];
 }
 
 message UserLoginResp {

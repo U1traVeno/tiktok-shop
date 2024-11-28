@@ -24,6 +24,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	"log"
 	"os"
 
@@ -75,7 +76,7 @@ func main() {
 	g := gen.NewGenerator(gen.Config{
 
 		// Replace your_model_name with your model name
-		OutPath: "./biz/dal/query/your_model_name/", // 输出路径
+		OutPath: "./biz/dal/query/user/", // 输出路径
 
 		Mode: gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 	})
@@ -84,7 +85,7 @@ func main() {
 	g.UseDB(gormdb)
 
 	// Add your own model here
-	//g.ApplyBasic(model.User{})
+	g.ApplyBasic(model.User{})
 
 	g.Execute()
 }

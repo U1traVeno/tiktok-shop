@@ -16,8 +16,15 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// User .
-// @router /user/ [GET]
+// User handles getting user information
+// @Summary Get user information
+// @Description Get user information by user ID and token
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param data body user.UserReq true "Request body with user ID and token"
+// @Success 200 {object} user.UserResp
+// @Router /user/ [get]
 func User(ctx context.Context, c *app.RequestContext) {
 	var req user.UserReq
 	if err := c.BindAndValidate(&req); err != nil {
@@ -25,12 +32,14 @@ func User(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	// validate token
 	userID, err := validateToken(req.Token)
 	if err != nil {
 		handleError(c, consts.StatusUnauthorized, err)
 		return
 	}
 
+	// get user
 	userQuery := query.User
 	u, err := userQuery.WithContext(ctx).Where(userQuery.ID.Eq(uint(userID))).First()
 	if err != nil {
@@ -38,17 +47,24 @@ func User(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	// response
 	resp := new(user.UserResp)
 	resp.StatusCode = consts.StatusOK
 	resp.StatusMsg = consts.StatusMessage(consts.StatusOK)
-
 	resp.Message = "Hello, " + u.Username
 
 	c.JSON(consts.StatusOK, resp)
 }
 
-// UserRegister .
-// @router /user/register [POST]
+// UserRegister handles user registration
+// @Summary Register a new user
+// @Description Register a new user with username and password
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param data body user.UserRegisterReq true "Request body with username and password"
+// @Success 200 {object} user.UserRegisterResp
+// @Router /user/register [post]
 func UserRegister(ctx context.Context, c *app.RequestContext) {
 	var req user.UserRegisterReq
 	if err := c.BindAndValidate(&req); err != nil {
@@ -56,34 +72,56 @@ func UserRegister(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	// check if username and password are empty
+	if req.Username == "" || req.Password == "" {
+		handleError(c, consts.StatusBadRequest, fmt.Errorf("username and password are required"))
+		return
+	}
+
+	// check if username exists
+	userQuery := query.User
+	u, err := userQuery.WithContext(ctx).Where(userQuery.Username.Eq(req.Username)).Take()
+	if u != nil {
+		handleError(c, consts.StatusConflict, fmt.Errorf("username exists"))
+		return
+	}
+
+	// hash password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 	if err != nil {
 		handleError(c, consts.StatusInternalServerError, err)
 		return
 	}
 
+	// create user
 	newUser := model.User{
 		Username: req.Username,
 		Password: string(hashedPassword),
 	}
-
 	if err := query.User.Create(&newUser); err != nil {
 		handleError(c, consts.StatusInternalServerError, err)
 		return
 	}
 
+	// response
 	resp := new(user.UserRegisterResp)
 	resp.StatusCode = consts.StatusOK
 	resp.StatusMsg = consts.StatusMessage(consts.StatusOK)
-
 	resp.UserId = int64(newUser.ID)
 	resp.Token = generateToken(int64(newUser.ID))
 
 	c.JSON(consts.StatusOK, resp)
 }
 
-// UserLogin .
-// @router /user/login [POST]
+// UserLogin handles user login
+// @Summary User Login
+// @Description User login with username and password
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param data body user.UserLoginReq true "Request body with username and password"
+// @Success 200 {object} user.UserLoginResp
+// @Router /user/login [post]
 func UserLogin(ctx context.Context, c *app.RequestContext) {
 	var req user.UserLoginReq
 	if err := c.BindAndValidate(&req); err != nil {
@@ -91,6 +129,7 @@ func UserLogin(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	// check if username and password are empty
 	userQuery := query.User
 	u, err := userQuery.WithContext(ctx).Where(userQuery.Username.Eq(req.Username)).First()
 	if err != nil {
@@ -98,18 +137,20 @@ func UserLogin(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	// compare password
 	if err := bcrypt.CompareHashAndPassword([]byte(u.Password), []byte(req.Password)); err != nil {
 		handleError(c, consts.StatusUnauthorized, fmt.Errorf("password error"))
 		return
 	}
 
+	// response
 	resp := new(user.UserLoginResp)
 	resp.StatusCode = consts.StatusOK
 	resp.StatusMsg = consts.StatusMessage(consts.StatusOK)
-
 	resp.UserId = int64(u.ID)
 	resp.Token = generateToken(int64(u.ID))
 
+	// update token
 	if err := updateToken(ctx, int64(u.ID), resp.Token); err != nil {
 		handleError(c, consts.StatusInternalServerError, err)
 		return
