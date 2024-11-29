@@ -13,6 +13,7 @@ func NewAllModels() *AllModels {
 			&User{},
 			&Product{},
 			&Cart{},
+			&CartItems{},
 			&Order{},
 		},
 	}
