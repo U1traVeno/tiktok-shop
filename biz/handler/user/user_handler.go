@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
+	service "github.com/U1traVeno/tiktok-shop/biz/service/user"
 	"strconv"
 	"strings"
 	"time"
@@ -65,48 +65,25 @@ func User(ctx context.Context, c *app.RequestContext) {
 // @Router /user/register [post]
 func UserRegister(ctx context.Context, c *app.RequestContext) {
 	var req user.UserRegisterReq
-	if err := c.BindAndValidate(&req); err != nil {
+	var err error
+
+	err = c.BindAndValidate(&req)
+	if err != nil {
 		handleError(c, consts.StatusBadRequest, err)
 		return
 	}
 
-	// check if username and password are empty
-	if req.Username == "" || req.Password == "" {
-		handleError(c, consts.StatusBadRequest, fmt.Errorf("username and password are required"))
-		return
-	}
-
-	// check if username exists
-	userQuery := query.User
-	u, err := userQuery.WithContext(ctx).Where(userQuery.Username.Eq(req.Username)).Take()
-	if u != nil {
-		handleError(c, consts.StatusConflict, fmt.Errorf("username exists"))
-		return
-	}
-
-	// hash password
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
+	userID, err := service.NewUserService(ctx, c).UserRegister(&req)
 	if err != nil {
 		handleError(c, consts.StatusInternalServerError, err)
 		return
 	}
-
-	// create user
-	newUser := model.User{
-		Username: req.Username,
-		Password: string(hashedPassword),
-	}
-	if err := query.User.Create(&newUser); err != nil {
-		handleError(c, consts.StatusInternalServerError, err)
-		return
-	}
-
 	// response
 	resp := new(user.UserRegisterResp)
 	resp.StatusCode = consts.StatusOK
 	resp.StatusMsg = consts.StatusMessage(consts.StatusOK)
-	resp.UserId = int64(newUser.ID)
-	resp.Token = generateToken(int64(newUser.ID))
+	resp.UserId = userID
+	resp.Token = generateToken(userID)
 
 	c.JSON(consts.StatusOK, resp)
 }
