@@ -5,11 +5,12 @@ go 1.23.3
 require (
 	github.com/cloudwego/hertz v0.9.3
 	github.com/joho/godotenv v1.5.1
+	github.com/lib/pq v1.10.4
 	google.golang.org/protobuf v1.27.1
 	gorm.io/driver/postgres v1.5.10
 	gorm.io/gen v0.3.26
 	gorm.io/gorm v1.25.12
-	github.com/lib/pq v1.10.4
+	gorm.io/plugin/dbresolver v1.5.3
 )
 
 require (
@@ -48,5 +49,4 @@ require (
 	gorm.io/datatypes v1.1.1-0.20230130040222-c43177d3cf8c // indirect
 	gorm.io/driver/mysql v1.5.7 // indirect
 	gorm.io/hints v1.1.0 // indirect
-	gorm.io/plugin/dbresolver v1.5.3 // indirect
 )

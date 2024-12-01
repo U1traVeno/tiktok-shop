@@ -4,7 +4,7 @@ package product
 
 import (
 	"context"
-
+	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	product "github.com/U1traVeno/tiktok-shop/biz/model/product"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
@@ -13,15 +13,18 @@ import (
 // ListProducts .
 // @router /products [GET]
 func ListProducts(ctx context.Context, c *app.RequestContext) {
-	var err error
 	var req product.ListProductsReq
-	err = c.BindAndValidate(&req)
+	err := c.BindAndValidate(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
-
-	resp := new(product.ListProductsResp)
+	products, err := query.Products.WithContext(ctx).List(req.Limit, req.Offset)
+	if err != nil {
+		c.String(consts.StatusInternalServerError, err.Error())
+		return
+	}
+	resp := product.ListProductsResp{Products: products}
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -36,7 +39,11 @@ func GetProduct(ctx context.Context, c *app.RequestContext) {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
 	}
-
+	product, err := query.Products.WithContext(ctx).FindByID(req.ID)
+	if err != nil {
+		c.String(consts.StatusInternalServerError, err.Error())
+		return
+	}
 	resp := new(product.GetProductResp)
 
 	c.JSON(consts.StatusOK, resp)
@@ -50,6 +57,11 @@ func SearchProducts(ctx context.Context, c *app.RequestContext) {
 	err = c.BindAndValidate(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
+		return
+	}
+	products, err := query.Products.WithContext(ctx).Search(req.Keyword)
+	if err != nil {
+		c.String(consts.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -67,6 +79,10 @@ func CreateProduct(ctx context.Context, c *app.RequestContext) {
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
+	}
+	newProduct := &product.Product{
+		Name:  req.Name,
+		Price: req.Price,
 	}
 
 	resp := new(product.CreateProductResp)

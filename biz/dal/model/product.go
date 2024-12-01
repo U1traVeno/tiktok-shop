@@ -8,6 +8,7 @@ import (
 type Product struct {
 	gorm.Model
 	Name        string         `json:"name"`
+	Amount      int            `json:"amount"`
 	Description string         `json:"description"`
 	Picture     string         `json:"picture"`
 	Price       float32        `json:"price"`

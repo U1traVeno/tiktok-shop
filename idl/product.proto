@@ -53,7 +53,8 @@ message Product {
   string description = 3;  // 商品描述
   string picture = 4;      // 商品图片 URL
   float price = 5;         // 商品价格
-  repeated string categories = 6; // 商品所属类别
+  int32 amount = 6;        // 商品数量
+  repeated string categories = 7; // 商品所属类别
 }
 
 // ListProductsResp 是获取商品列表的响应消息
@@ -87,7 +88,8 @@ message CreateProductReq {
   string description = 2;  // 商品描述
   string picture = 3;      // 商品图片 URL
   float price = 4;         // 商品价格
-  repeated string categories = 5; // 商品所属类别
+  int32 amount = 5;        // 商品数量
+  repeated string categories = 6; // 商品所属类��
 }
 
 // CreateProductResp 是创建商品的响应消息
@@ -102,7 +104,8 @@ message UpdateProductReq {
   string description = 3;  // 商品描述
   string picture = 4;      // 商品图片 URL
   float price = 5;         // 商品价格
-  repeated string categories = 6; // 商品所属类别
+  int32 amount = 6;        // 商品数量
+  repeated string categories = 7; // 商品所属类别
 }
 
 // UpdateProductResp 是更新商品的响应消息
@@ -115,7 +118,7 @@ message DeleteProductReq {
   uint32 id = 1; // 要删除的商品 ID
 }
 
-// DeleteProductResp 是删除商品的响应消息
+// DeleteProductResp 是删除商品��响应消息
 message DeleteProductResp {
   string message = 1; // 删除结果消息
 }
