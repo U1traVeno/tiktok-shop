@@ -30,3 +30,8 @@ func _userregisterMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _addemailMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}

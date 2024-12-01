@@ -18,9 +18,6 @@ const docTemplate = `{
         "/user/": {
             "get": {
                 "description": "Get user information by user ID and token",
-                "consumes": [
-                    "application/json"
-                ],
                 "produces": [
                     "application/json"
                 ],
@@ -30,13 +27,11 @@ const docTemplate = `{
                 "summary": "Get user information",
                 "parameters": [
                     {
+                        "type": "integer",
                         "description": "Request body with user ID and token",
-                        "name": "data",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/user.UserReq"
-                        }
+                        "name": "id",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -44,6 +39,40 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/user.UserResp"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/add_email": {
+            "post": {
+                "description": "Add an email to a user account by user ID and token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Add email",
+                "parameters": [
+                    {
+                        "description": "Request body with user ID, token, and email",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.AddEmailReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.AddEmailResp"
                         }
                     }
                 }
@@ -119,6 +148,31 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "user.AddEmailReq": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "user.AddEmailResp": {
+            "type": "object",
+            "properties": {
+                "status_code": {
+                    "type": "integer"
+                },
+                "status_msg": {
+                    "type": "string"
+                }
+            }
+        },
         "user.UserLoginReq": {
             "type": "object",
             "properties": {
@@ -167,17 +221,6 @@ const docTemplate = `{
                 "status_msg": {
                     "type": "string"
                 },
-                "token": {
-                    "type": "string"
-                },
-                "user_id": {
-                    "type": "integer"
-                }
-            }
-        },
-        "user.UserReq": {
-            "type": "object",
-            "properties": {
                 "token": {
                     "type": "string"
                 },

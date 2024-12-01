@@ -16,11 +16,14 @@ service UserHandler {
   rpc UserLogin(UserLoginReq) returns (UserLoginResp) {
     option (api.post) = "/user/login";
   }
+  rpc AddEmail(AddEmailReq) returns (AddEmailResp) {
+    option (api.post) = "/user/add_email";
+  }
 }
 
 message UserReq {
-  int64 user_id = 1[(api.go_tag)='json:"user_id"'];
-  string token = 2[(api.go_tag)='json:"token"'];
+  int64 user_id = 1[(api.query)="id"];
+  string token = 2;
 }
 
 message UserResp {
@@ -51,4 +54,15 @@ message UserLoginResp {
   string status_msg = 2;
   int64 user_id = 3;
   string token = 4;
+}
+
+message AddEmailReq {
+  int64 user_id = 1[(api.go_tag)= 'json:"user_id"'];
+  string token = 2;
+  string email = 3[(api.go_tag)='json:"email"'];
+}
+
+message AddEmailResp {
+  int32 status_code = 1[(api.go_tag)='json:"status_code"'];
+  string status_msg = 2;
 }

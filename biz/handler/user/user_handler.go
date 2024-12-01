@@ -20,9 +20,8 @@ import (
 // @Summary Get user information
 // @Description Get user information by user ID and token
 // @Tags User
-// @Accept json
 // @Produce json
-// @Param data body user.UserReq true "Request body with user ID and token"
+// @Param id query int true "Request body with user ID and token"
 // @Success 200 {object} user.UserResp
 // @Router /user/ [get]
 func User(ctx context.Context, c *app.RequestContext) {
@@ -52,7 +51,6 @@ func User(ctx context.Context, c *app.RequestContext) {
 	resp.StatusCode = consts.StatusOK
 	resp.StatusMsg = consts.StatusMessage(consts.StatusOK)
 	resp.Message = "Hello, " + u.Username
-
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -155,6 +153,29 @@ func UserLogin(ctx context.Context, c *app.RequestContext) {
 		handleError(c, consts.StatusInternalServerError, err)
 		return
 	}
+
+	c.JSON(consts.StatusOK, resp)
+}
+
+// AddEmail TODO handles adding an email to a user account
+// @Summary Add email
+// @Description Add an email to a user account by user ID and token
+// @Tags User
+// @Accept json
+// @Produce json
+// @Param data body user.AddEmailReq true "Request body with user ID, token, and email"
+// @Success 200 {object} user.AddEmailResp
+// @Router /user/add_email [post]
+func AddEmail(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req user.AddEmailReq
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		c.String(consts.StatusBadRequest, err.Error())
+		return
+	}
+
+	resp := new(user.AddEmailResp)
 
 	c.JSON(consts.StatusOK, resp)
 }

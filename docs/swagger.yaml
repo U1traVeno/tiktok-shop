@@ -1,4 +1,20 @@
 definitions:
+  user.AddEmailReq:
+    properties:
+      email:
+        type: string
+      token:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  user.AddEmailResp:
+    properties:
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+    type: object
   user.UserLoginReq:
     properties:
       password:
@@ -35,13 +51,6 @@ definitions:
       user_id:
         type: integer
     type: object
-  user.UserReq:
-    properties:
-      token:
-        type: string
-      user_id:
-        type: integer
-    type: object
   user.UserResp:
     properties:
       message:
@@ -56,16 +65,13 @@ info:
 paths:
   /user/:
     get:
-      consumes:
-      - application/json
       description: Get user information by user ID and token
       parameters:
       - description: Request body with user ID and token
-        in: body
-        name: data
+        in: query
+        name: id
         required: true
-        schema:
-          $ref: '#/definitions/user.UserReq'
+        type: integer
       produces:
       - application/json
       responses:
@@ -74,6 +80,28 @@ paths:
           schema:
             $ref: '#/definitions/user.UserResp'
       summary: Get user information
+      tags:
+      - User
+  /user/add_email:
+    post:
+      consumes:
+      - application/json
+      description: Add an email to a user account by user ID and token
+      parameters:
+      - description: Request body with user ID, token, and email
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.AddEmailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.AddEmailResp'
+      summary: Add email
       tags:
       - User
   /user/login:
