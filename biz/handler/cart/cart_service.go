@@ -4,17 +4,14 @@ package cart
 
 import (
 	"context"
-	"fmt"
+	"github.com/U1traVeno/tiktok-shop/biz/dal/db"
 	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	query "github.com/U1traVeno/tiktok-shop/biz/dal/query/cart"
 	cart "github.com/U1traVeno/tiktok-shop/biz/model/cart"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 	"log"
-	"os"
 )
 
 // CreateCart .
@@ -33,23 +30,7 @@ func CreateCart(ctx context.Context, c *app.RequestContext) {
 		log.Fatalf("Error loading .env file: %v", err)
 	}
 
-	// 从环境变量读取数据库配置
-	dbUser := os.Getenv("DB_USER")
-	dbPassword := os.Getenv("DB_PASSWORD")
-	dbHost := os.Getenv("DB_HOST")
-	dbPort := os.Getenv("DB_PORT")
-	dbName := os.Getenv("DB_NAME")
-
-	if dbUser == "" || dbPassword == "" || dbHost == "" || dbPort == "" || dbName == "" {
-		panic("database configuration is not fully set in .env file")
-	}
-
-	// 构建 DSN
-	dsn := fmt.Sprintf(
-		"user=%s password=%s host=%s port=%s dbname=%s sslmode=disable TimeZone=Asia/Shanghai search_path=xd_schema",
-		dbUser, dbPassword, dbHost, dbPort, dbName,
-	)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err := db.Init()
 	if err != nil {
 		c.String(consts.StatusInternalServerError, err.Error())
 		return
@@ -59,6 +40,12 @@ func CreateCart(ctx context.Context, c *app.RequestContext) {
 
 	newCart := model.Cart{
 		UserId: req.UserId,
+	}
+
+	findCart, _ := query.Cart.Where(query.Cart.UserId.Eq(req.UserId)).Take()
+	if findCart != nil {
+		c.String(consts.StatusBadRequest, "用户购物车已存在")
+		return
 	}
 
 	err = query.Cart.Create(&newCart)
@@ -118,7 +105,24 @@ func EmptyCart(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp := new(cart.EmptyCartResp)
+	Db, err := db.Init()
+	if err != nil {
+		c.String(consts.StatusInternalServerError, err.Error())
+		return
+	}
+	query.SetDefault(Db)
+
+	findCart, _ := query.Cart.Where(query.Cart.UserId.Eq(req.UserId)).Take()
+	if findCart == nil {
+		c.String(consts.StatusBadRequest, "用户购物车不存在")
+		return
+	}
+
+	_, _ = query.Cart.Where(query.Cart.UserId.Eq(req.UserId), query.Cart.CartId.Eq(findCart.CartId)).Delete()
+
+	_, _ = query.Cart.Where(query.CartItems.CartId.Eq(findCart.CartId)).Delete()
+
+	resp := &cart.EmptyCartResp{}
 
 	c.JSON(consts.StatusOK, resp)
 }

@@ -8,7 +8,7 @@ import "api.proto";
 
 service CartService {
   rpc CreateCart(CreateCartReq) returns(CreateCartResp){
-    option(api.get)="/cart";
+    option(api.post)="/cart";
   }
 
   rpc AddItem(AddItemReq) returns (AddItemResp) {
@@ -18,12 +18,12 @@ service CartService {
     option(api.get)="/cart/get";
   }
   rpc EmptyCart(EmptyCartReq) returns (EmptyCartResp) {
-    option(api.delete)="/cart/empty";
+    option(api.delete)="/cart/empty/{user_id}";
   }
 }
 
 message CreateCartReq{
-  uint32 user_id=1[(api.query) = "user_id"];
+  uint32 user_id=1;
 }
 
 message CreateCartResp{
@@ -36,14 +36,14 @@ message CartItem {
 }
 
 message AddItemReq {
-  uint32 user_id = 1 [(api.query) = "user_id"];
+  uint32 user_id = 1;
   CartItem item = 2;
 }
 
 message AddItemResp {}
 
 message EmptyCartReq {
-  uint32 user_id = 1 [(api.query) = "user_id"];
+  uint32 user_id = 1;
 }
 
 message GetCartReq {

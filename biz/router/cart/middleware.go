@@ -35,3 +35,8 @@ func _additemMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _emptyMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
