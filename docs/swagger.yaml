@@ -1,0 +1,151 @@
+definitions:
+  user.AddEmailReq:
+    properties:
+      email:
+        type: string
+      token:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  user.AddEmailResp:
+    properties:
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+    type: object
+  user.UserLoginReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  user.UserLoginResp:
+    properties:
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+      token:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  user.UserRegisterReq:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  user.UserRegisterResp:
+    properties:
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+      token:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  user.UserResp:
+    properties:
+      message:
+        type: string
+      status_code:
+        type: integer
+      status_msg:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /user/:
+    get:
+      description: Get user information by user ID and token
+      parameters:
+      - description: Request body with user ID and token
+        in: query
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserResp'
+      summary: Get user information
+      tags:
+      - User
+  /user/add_email:
+    post:
+      consumes:
+      - application/json
+      description: Add an email to a user account by user ID and token
+      parameters:
+      - description: Request body with user ID, token, and email
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.AddEmailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.AddEmailResp'
+      summary: Add email
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: User login with username and password
+      parameters:
+      - description: Request body with username and password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserLoginReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserLoginResp'
+      summary: User Login
+      tags:
+      - User
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a new user with username and password
+      parameters:
+      - description: Request body with username and password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserRegisterReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.UserRegisterResp'
+      summary: Register a new user
+      tags:
+      - User
+swagger: "2.0"

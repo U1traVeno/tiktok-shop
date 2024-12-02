@@ -3,12 +3,27 @@
 package main
 
 import (
+	"context"
+	"github.com/U1traVeno/tiktok-shop/biz/dal"
+	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
+	"github.com/hertz-contrib/swagger"
+	swaggerFiles "github.com/swaggo/files"
 )
 
 func main() {
-	h := server.Default()
+	dal.Init()
 
+	h := server.Default()
 	register(h)
+
+	// Swagger UI
+	// Serve Swagger JSON
+	h.GET("/swagger/swagger.json", func(c context.Context, ctx *app.RequestContext) {
+		ctx.File("./docs/swagger.json")
+	})
+	url := swagger.URL("http://127.0.0.1:8888/swagger/swagger.json") // 这里不能是localhost
+	h.GET("/swagger/*any", swagger.WrapHandler(swaggerFiles.Handler, url))
+
 	h.Spin()
 }
