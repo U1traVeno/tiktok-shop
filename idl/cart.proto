@@ -17,14 +17,10 @@ service CartHandler {
     option(api.delete)="/cart/empty";
   }
 }
-message CommonResponse {
-  int32 status_code = 1[(api.go_tag) = 'json:"status_code"'];
-  string status_msg = 2[(api.go_tag) = 'json:"status_message"'];
-}
 
 message CartItem {
   uint64 product_id = 1[(api.go_tag) = 'json:"product_id"'];
-  int64  quantity = 2[(api.go_tag) = 'json:"quantity"'];
+  uint64 quantity = 2[(api.go_tag) = 'json:"quantity"'];
 }
 
 message AddItemReq {
@@ -33,7 +29,8 @@ message AddItemReq {
 }
 
 message AddItemResp {
-  CommonResponse response=1;
+  int32 status_code = 1[(api.go_tag) = 'json:"status_code"'];
+  string status_msg = 2;;
 }
 
 message EmptyCartReq {
@@ -45,8 +42,9 @@ message GetCartReq {
 }
 
 message GetCartResp {
-  CommonResponse response=1;
-  Cart cart = 2;
+  int32 status_code = 1[(api.go_tag) = 'json:"status_code"'];
+  string status_msg = 2;
+  Cart cart = 3;
 }
 
 message Cart {
@@ -55,5 +53,6 @@ message Cart {
 }
 
 message EmptyCartResp {
-  CommonResponse response=1;
+  int32 status_code = 1[(api.go_tag) = 'json:"status_code"'];
+  string status_msg = 2;;
 }
