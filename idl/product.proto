@@ -43,7 +43,7 @@ service ProductHandler {
 message ListProductsReq {
   int32 page = 1;         // 分页页码
   int32 pageSize = 2;     // 每页商品数量
-  string categoryName = 3; // 按类别名称过滤
+  repeated string  categoryName = 3; // 按类别名称过滤
 }
 
 // Product 表示商品信息
@@ -90,6 +90,7 @@ message CreateProductReq {
   float price = 4;         // 商品价格
   int32 amount = 5;        // 商品数量
   repeated string categories = 6; // 商品所属类��
+  int32 id=7;//商品id
 }
 
 // CreateProductResp 是创建商品的响应消息

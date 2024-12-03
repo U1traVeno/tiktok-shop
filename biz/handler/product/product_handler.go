@@ -4,8 +4,8 @@ package product
 
 import (
 	"context"
-	"github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	product "github.com/U1traVeno/tiktok-shop/biz/model/product"
+	productservice "github.com/U1traVeno/tiktok-shop/biz/service"
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
@@ -13,20 +13,20 @@ import (
 // ListProducts .
 // @router /products [GET]
 func ListProducts(ctx context.Context, c *app.RequestContext) {
+	var err error
 	var req product.ListProductsReq
-	err := c.BindAndValidate(&req)
+	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
-	products, err := query.Products.WithContext(ctx).List(req.Limit, req.Offset)
+	resp, err := productservice.NewProductService(ctx, c).ListProducts(&req)
 	if err != nil {
-		c.String(consts.StatusInternalServerError, err.Error())
+		c.JSON(consts.StatusInternalServerError, err.Error())
 		return
 	}
-	resp := product.ListProductsResp{Products: products}
-
 	c.JSON(consts.StatusOK, resp)
+
 }
 
 // GetProduct .
@@ -36,16 +36,14 @@ func GetProduct(ctx context.Context, c *app.RequestContext) {
 	var req product.GetProductReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
-	product, err := query.Products.WithContext(ctx).FindByID(req.ID)
+	resp, err := productservice.NewProductService(ctx, c).GetProduct(&req)
 	if err != nil {
-		c.String(consts.StatusInternalServerError, err.Error())
+		c.JSON(consts.StatusInternalServerError, err.Error())
 		return
 	}
-	resp := new(product.GetProductResp)
-
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -56,16 +54,14 @@ func SearchProducts(ctx context.Context, c *app.RequestContext) {
 	var req product.SearchProductsReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
-	products, err := query.Products.WithContext(ctx).Search(req.Keyword)
+	resp, err := productservice.NewProductService(ctx, c).SearchProducts(&req)
 	if err != nil {
-		c.String(consts.StatusInternalServerError, err.Error())
+		c.JSON(consts.StatusInternalServerError, err.Error())
 		return
 	}
-
-	resp := new(product.SearchProductsResp)
 
 	c.JSON(consts.StatusOK, resp)
 }
@@ -77,16 +73,14 @@ func CreateProduct(ctx context.Context, c *app.RequestContext) {
 	var req product.CreateProductReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
-	newProduct := &product.Product{
-		Name:  req.Name,
-		Price: req.Price,
+	resp, err := productservice.NewProductService(ctx, c).CreateProduct(&req)
+	if err != nil {
+		c.JSON(consts.StatusInternalServerError, err.Error())
+		return
 	}
-
-	resp := new(product.CreateProductResp)
-
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -97,12 +91,14 @@ func UpdateProduct(ctx context.Context, c *app.RequestContext) {
 	var req product.UpdateProductReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
-
-	resp := new(product.UpdateProductResp)
-
+	resp, err := productservice.NewProductService(ctx, c).UpdateProduct(&req)
+	if err != nil {
+		c.JSON(consts.StatusInternalServerError, err.Error())
+		return
+	}
 	c.JSON(consts.StatusOK, resp)
 }
 
@@ -113,11 +109,15 @@ func DeleteProduct(ctx context.Context, c *app.RequestContext) {
 	var req product.DeleteProductReq
 	err = c.BindAndValidate(&req)
 	if err != nil {
-		c.String(consts.StatusBadRequest, err.Error())
+		c.JSON(consts.StatusBadRequest, err.Error())
 		return
 	}
 
-	resp := new(product.DeleteProductResp)
+	resp, err := productservice.NewProductService(ctx, c).DeleteProduct(&req)
+	if err != nil {
+		c.JSON(consts.StatusInternalServerError, err.Error())
+		return
+	}
 
 	c.JSON(consts.StatusOK, resp)
 }
