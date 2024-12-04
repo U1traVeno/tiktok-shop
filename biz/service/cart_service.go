@@ -24,7 +24,7 @@ func NewCartService(ctx context.Context, c *app.RequestContext) *CartService {
 }
 
 func (s *CartService) AddItem(req *cart.AddItemReq) error {
-	//判断数据合法性
+	//检查数据是否合法
 	if req.Item.Quantity <= 0 || req.Item.ProductId <= 0 || req.UserId <= 0 {
 		return fmt.Errorf("invalid data")
 	}
@@ -62,6 +62,29 @@ func (s *CartService) GetCart(req *cart.GetCartReq) (*cart.GetCartResp, error) {
 	return nil, nil
 }
 
-func (s *CartService) Empty(req *cart.EmptyCartReq) (*cart.EmptyCartResp, error) {
-	return nil, nil
+func (s *CartService) Empty(userid uint64) error {
+	//检查userid是否合法
+	if userid <= 0 {
+		return fmt.Errorf("invalid userid")
+	}
+
+	cartTable := query.Cart
+
+	//检查是否购物车中是否有商品
+	_, err := cartTable.Where(cartTable.UserId.Eq(userid)).First()
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return fmt.Errorf("cart is empty")
+		}
+		return fmt.Errorf("failed to find cart item: %w", err)
+	}
+
+	//删除购物车中商品
+	_, err = cartTable.Where(cartTable.UserId.Eq(userid)).Delete()
+
+	if err != nil {
+		return fmt.Errorf("failed to delete cart item: %w", err)
+	}
+
+	return nil
 }

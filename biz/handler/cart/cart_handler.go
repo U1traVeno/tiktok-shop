@@ -23,7 +23,7 @@ func AddItem(ctx context.Context, c *app.RequestContext) {
 	}
 
 	//add item
-	_, err = service.NewCartService(ctx, c).AddItem(&req)
+	err = service.NewCartService(ctx, c).AddItem(&req)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
@@ -59,6 +59,13 @@ func EmptyCart(ctx context.Context, c *app.RequestContext) {
 	var err error
 	var req cart.EmptyCartReq
 	err = c.BindAndValidate(&req)
+	if err != nil {
+		c.String(consts.StatusBadRequest, err.Error())
+		return
+	}
+
+	//empty cart
+	err = service.NewCartService(ctx, c).Empty(req.UserId)
 	if err != nil {
 		c.String(consts.StatusBadRequest, err.Error())
 		return
