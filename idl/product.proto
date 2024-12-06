@@ -60,6 +60,8 @@ message Product {
 // ListProductsResp 是获取商品列表的响应消息
 message ListProductsResp {
   repeated Product products = 1; // 商品列表
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }
 
 // GetProductReq 是获取单个商品的请求消息
@@ -70,6 +72,8 @@ message GetProductReq {
 // GetProductResp 是获取单个商品的响应消息
 message GetProductResp {
   Product product = 1; // 获取到的商品
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }
 
 // SearchProductsReq 是搜索商品的请求消息
@@ -80,6 +84,8 @@ message SearchProductsReq {
 // SearchProductsResp 是搜索商品的响应消息
 message SearchProductsResp {
   repeated Product results = 1; // 匹配搜索查询的商品列表
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }
 
 // CreateProductReq 是创建商品的请求消息
@@ -96,6 +102,8 @@ message CreateProductReq {
 // CreateProductResp 是创建商品的响应消息
 message CreateProductResp {
   Product product = 1; // 创建的商品
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }
 
 // UpdateProductReq 是更新商品的请求消息
@@ -112,6 +120,8 @@ message UpdateProductReq {
 // UpdateProductResp 是更新商品的响应消息
 message UpdateProductResp {
   Product product = 1; // 更新的商品
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }
 
 // DeleteProductReq 是删除商品的请求消息
@@ -122,4 +132,6 @@ message DeleteProductReq {
 // DeleteProductResp 是删除商品��响应消息
 message DeleteProductResp {
   string message = 1; // 删除结果消息
+  int32 status_code = 2[(api.go_tag)='json:"status_code"'];
+  string status_msg = 3;
 }

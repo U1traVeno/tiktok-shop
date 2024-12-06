@@ -35,6 +35,8 @@ func (s *ProductService) GetProduct(req *product.GetProductReq) (*product.GetPro
 
 	// 构建响应
 	resp := &product.GetProductResp{
+		StatusCode: 200,
+		StatusMsg:  "find product successfully" + strconv.Itoa(int(Id)),
 		Product: &product.Product{
 			Id:          Product.Id,
 			Name:        Product.Name,
@@ -55,7 +57,7 @@ func (s *ProductService) convertToProductList(products []*product.Product) []*pr
 		producilist = append(producilist, &product.Product{
 			Id:          productElment.Id,
 			Name:        productElment.Name,
-			Amount:      int32(productElment.Amount),
+			Amount:      productElment.Amount,
 			Description: productElment.Description,
 			Picture:     productElment.Picture,
 			Price:       productElment.Price,
@@ -86,6 +88,9 @@ func (s *ProductService) ListProducts(req *product.ListProductsReq) (*product.Li
 		})
 	}
 	resp := &product.ListProductsResp{
+		StatusMsg:  "find products successfully",
+		StatusCode: 200,
+
 		Products: producilist,
 	}
 
@@ -112,7 +117,9 @@ func (s *ProductService) SearchProducts(req *product.SearchProductsReq) (*produc
 		})
 	}
 	resp := &product.SearchProductsResp{
-		Results: productlist,
+		Results:    productlist,
+		StatusCode: 200,
+		StatusMsg:  "find products successfully" + strconv.Itoa(len(productlist)) + "个商品",
 	}
 
 	return resp, nil
@@ -138,6 +145,7 @@ func (s *ProductService) CreateProduct(req *product.CreateProductReq) (*product.
 	}
 
 	resp := &product.CreateProductResp{
+
 		Product: &product.Product{
 			Id:          uint32(req.Id),
 			Name:        req.Name,
@@ -147,6 +155,8 @@ func (s *ProductService) CreateProduct(req *product.CreateProductReq) (*product.
 			Price:       req.Price,
 			Categories:  pq.StringArray(req.Categories),
 		},
+		StatusCode: 201,
+		StatusMsg:  "create product successfully" + strconv.Itoa(int(req.Id)),
 	}
 
 	return resp, nil
@@ -167,9 +177,16 @@ func (s *ProductService) UpdateProductAmount(Id uint32, UpdateAmount int32) (*pr
 	if err != nil {
 		return nil, err
 	}
-	//要修改
-	//TODO: 未完成
-	return nil, nil
+	resp := &product.UpdateProductResp{
+		StatusCode: 200,
+		StatusMsg:  "update product successfully" + strconv.Itoa(int(Id)),
+		Product: &product.Product{
+			Id:     Id,
+			Amount: int32(preAmount.Amount + int(UpdateAmount)),
+		},
+	}
+
+	return resp, nil
 }
 
 // UpdateProduct 更新商品
@@ -192,6 +209,8 @@ func (s *ProductService) UpdateProduct(req *product.UpdateProductReq) (*product.
 	}
 
 	resp := &product.UpdateProductResp{
+		StatusCode: 200,
+		StatusMsg:  "update product successfully" + strconv.Itoa(int(req.Id)),
 		Product: &product.Product{
 			Id:          req.Id,
 			Name:        req.Name,
@@ -216,7 +235,9 @@ func (s *ProductService) DeleteProduct(req *product.DeleteProductReq) (*product.
 	}
 
 	resp := &product.DeleteProductResp{
-		Message: "Delete product successfully, id: " + strconv.Itoa(int(req.Id)),
+		StatusCode: 200,
+		StatusMsg:  "Delete product successfully" + strconv.Itoa(int(req.Id)),
+		Message:    "Delete product successfully, id: " + strconv.Itoa(int(req.Id)),
 	}
 
 	return resp, nil
