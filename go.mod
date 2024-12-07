@@ -4,9 +4,13 @@ go 1.23.3
 
 require (
 	github.com/cloudwego/hertz v0.9.3
+	github.com/henrylee2cn/goutil v0.0.0-20210127050712-89660552f6f8
+	github.com/hertz-contrib/logger/logrus v1.0.1
 	github.com/joho/godotenv v1.5.1
 	github.com/lib/pq v1.10.4
+	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.27.1
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 	gorm.io/driver/postgres v1.5.10
 	gorm.io/gen v0.3.26
 	gorm.io/gorm v1.25.12
@@ -25,7 +29,6 @@ require (
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/golang/protobuf v1.5.0 // indirect
 	github.com/henrylee2cn/ameda v1.4.10 // indirect
-	github.com/henrylee2cn/goutil v0.0.0-20210127050712-89660552f6f8 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.5.5 // indirect

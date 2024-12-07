@@ -8,6 +8,7 @@ import (
 	productservice "github.com/U1traVeno/tiktok-shop/biz/service"
 	"github.com/U1traVeno/tiktok-shop/pkg/utils"
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/cloudwego/hertz/pkg/protocol/consts"
 )
 
@@ -34,6 +35,7 @@ func ListProducts(ctx context.Context, c *app.RequestContext) {
 		})
 		return
 	}
+	hlog.Info()
 	c.JSON(consts.StatusOK, resp)
 
 }

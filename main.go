@@ -3,12 +3,13 @@
 package main
 
 import (
+	"github.com/U1traVeno/tiktok-shop/pkg/utils"
 	"github.com/cloudwego/hertz/pkg/app/server"
 )
 
 func main() {
 	h := server.Default()
-
+	utils.InitHlog()
 	register(h)
 	h.Spin()
 }
