@@ -48,7 +48,21 @@ func GetCart(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
+	//get cart
+	items, err := service.NewCartService(ctx, c).GetCart(req.UserId)
+	if err != nil {
+		c.String(consts.StatusBadRequest, err.Error())
+	}
+	userCart := &cart.Cart{
+		Items:  items,
+		UserId: req.UserId,
+	}
+
+	//response
 	resp := new(cart.GetCartResp)
+	resp.StatusCode = consts.StatusOK
+	resp.StatusMsg = "成功获取购物车"
+	resp.Cart = userCart
 
 	c.JSON(consts.StatusOK, resp)
 }

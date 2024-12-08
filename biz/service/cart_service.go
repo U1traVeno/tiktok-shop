@@ -55,11 +55,34 @@ func (s *CartService) AddItem(req *cart.AddItemReq) error {
 	if err != nil {
 		return fmt.Errorf("failed to update cart item: %w", err)
 	}
+
 	return nil
 }
 
-func (s *CartService) GetCart(req *cart.GetCartReq) (*cart.GetCartResp, error) {
-	return nil, nil
+func (s *CartService) GetCart(userid uint64) ([]*cart.CartItem, error) {
+	//检查userid是否合法
+	if userid <= 0 {
+		return nil, fmt.Errorf("invalid user ID")
+	}
+
+	cartTable := query.Cart
+
+	//查找用户购物车中的商品
+	cartItems, err := cartTable.Where(cartTable.UserId.Eq(userid)).Find()
+	if err != nil {
+		return nil, fmt.Errorf("failed to find cart items: %w", err)
+	}
+
+	//将查找到的商品转换为cartItem
+	var items []*cart.CartItem
+	for _, item := range cartItems {
+		items = append(items, &cart.CartItem{
+			ProductId: item.ProductID,
+			Quantity:  item.Quantity,
+		})
+	}
+
+	return items, nil
 }
 
 func (s *CartService) Empty(userid uint64) error {
