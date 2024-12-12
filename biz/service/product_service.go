@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	dalproduct "github.com/U1traVeno/tiktok-shop/biz/dal/model"
 	query "github.com/U1traVeno/tiktok-shop/biz/dal/query/product"
 	"github.com/U1traVeno/tiktok-shop/biz/model/product"
@@ -138,8 +139,13 @@ func (s *ProductService) CreateProduct(req *product.CreateProductReq) (*product.
 	}
 
 	productQuery := query.Product
+	//通过唯一的ID判断商品是否存在
+	_, err := productQuery.Where(productQuery.Id.Eq(uint32(req.Id))).First()
+	if err != nil {
+		return nil, fmt.Errorf("the goods already exist: %w", err)
+	}
 	// 创建商品
-	err := productQuery.WithContext(s.ctx).Create(newProduct)
+	err = productQuery.WithContext(s.ctx).Create(newProduct)
 	if err != nil {
 		return nil, err
 	}
@@ -169,10 +175,15 @@ func (s *ProductService) UpdateProductAmount(Id uint32, UpdateAmount int32) (*pr
 	if err != nil {
 		return nil, err
 	}
+	// 判断商品数量是否大于0
+	amount := preAmount.Amount + int(UpdateAmount)
+	if amount < 0 {
+		return nil, fmt.Errorf("the quantity of the goods is insufficient: %w", err)
+	}
 	// 更新商品
 	_, err = productQuery.WithContext(s.ctx).Where(productQuery.Id.Eq(Id)).Updates(
 		dalproduct.Product{
-			Amount: int(preAmount.Amount) + int(UpdateAmount),
+			Amount: preAmount.Amount + int(UpdateAmount),
 		})
 	if err != nil {
 		return nil, err

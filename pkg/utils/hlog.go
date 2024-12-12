@@ -15,24 +15,26 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-func InitHlog() {
+func InitHlog() *hertzlogrus.Logger {
 
 	// Customizable output directory.
+	// 可定制的输出目录。
 	var logFilePath string
 	dir := "./hlog"
 	logFilePath = dir + "/logs/"
 	if err := os.MkdirAll(logFilePath, 0o777); err != nil {
 		log.Println(err.Error())
-		return
+		return nil
 	}
 
 	// Set filename to date
+	// 将文件名设置为日期
 	logFileName := time.Now().Format("2006-01-02") + ".log"
 	fileName := path.Join(logFilePath, logFileName)
 	if _, err := os.Stat(fileName); err != nil {
 		if _, err := os.Create(fileName); err != nil {
 			log.Println(err.Error())
-			return
+			return nil
 		}
 	}
 
@@ -42,6 +44,7 @@ func InitHlog() {
 	// hlog will warp a layer of logrus, so you need to calculate the depth of the caller file separately.
 	logger.Logger().AddHook(NewCustomHook(10))
 	// Provides compression and deletion
+	// 提供压缩和删除
 	lumberjackLogger := &lumberjack.Logger{
 		Filename:   fileName,
 		MaxSize:    20,   // A file can be up to 20M.
@@ -56,7 +59,9 @@ func InitHlog() {
 
 	// fileWriter := io.MultiWriter(lumberjackLogger, os.Stdout)
 	// logger.SetOutput(fileWriter)
-	hlog.SetLogger(logger)
+
+	//hlog.SetLogger(logger)
+	return logger
 }
 
 // CustomHook Custom Hook for processing logs

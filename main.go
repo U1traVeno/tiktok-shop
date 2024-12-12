@@ -5,11 +5,13 @@ package main
 import (
 	"github.com/U1traVeno/tiktok-shop/pkg/utils"
 	"github.com/cloudwego/hertz/pkg/app/server"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 )
 
 func main() {
 	h := server.Default()
-	utils.InitHlog()
+	hlog.SetLogger(utils.InitHlog())
+	//hlog.Info("hello logrus")
 	register(h)
 	h.Spin()
 }
